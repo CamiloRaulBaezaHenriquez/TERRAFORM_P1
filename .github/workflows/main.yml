@@ -1,7 +1,7 @@
-name: Despliegue en testing con key
-# on:
-#    push:
-#      branches: [ testing ]
+name: Despliegue en testing con rol
+on:
+   push:
+     branches: [ testing ]
 jobs:
   deploy:
     name: Deploy
@@ -9,37 +9,36 @@ jobs:
       name: test
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout
-      - name: Configure AWS Profile
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile cbaeza
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile cbaeza
-          aws configure set region us-east-1 --profile cbaeza
-      - uses: hashicorp/setup-terraform@v1
+      - name: Checkout
+        uses: actions/checkout@v3    
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::042670738437:role/rol-terraform-github
+          aws-region: us-east-1
+          role-session-name: gorditou
+      - uses: hashicorp/setup-terraform@v2
         name: Configure Terraform
         with:
           terraform_version: 1.1.4
       - name: Initialize the Terraform
         run: |
-          terraform init  -backend-config="encrypt=true" -backend-config="bucket=tarrito-punkrock-cb-tf-test" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1" -backend-config="profile=cbaeza"
+          terraform init -backend-config="encrypt=true" -backend-config="bucket=tarrito-charmander-cb-tf-test" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1" -backend-config="token=${{ env.AWS_SESSION_TOKEN }}"
       - name: Select Workspace
         run: |
-          terraform workspace list
           terraform workspace select test || terraform workspace new test
+          terraform workspace list
       - name: Terraform Validate
         run: |
           terraform state pull
           terraform fmt
           terraform validate
       - name: Terraform Plan
-        run:  terraform plan
-      - name: Terraform Apply
+      #   run:  terraform plan
+      # - name: Terraform Apply 
         run: terraform apply -auto-approve
       - name: Validate Creation/Changes
         run: terraform state list
