@@ -19,7 +19,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::975050277813:role/ROL-GITHUB-OIDC
           aws-region: us-east-1
-          role-session-name: gorditou
+          role-session-name: gorditou2
       #- uses: hashicorp/setup-terraform@v2
       #  name: Configure Terraform
       #  with:
