@@ -13,13 +13,13 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v3    
+        uses: actions/checkout@v4
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::975050277813:role/f
+          role-to-assume: arn:aws:iam::975050277813:role/ROL-OIDC-GITHUB
           aws-region: us-east-1
-          role-session-name: gorditou1
+          role-session-name: gorditou
       #- uses: hashicorp/setup-terraform@v2
       #  name: Configure Terraform
       #  with:
