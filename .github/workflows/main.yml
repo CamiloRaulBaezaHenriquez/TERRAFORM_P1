@@ -28,7 +28,7 @@ jobs:
           terraform_version: 1.1.4
       - name: Initialize the Terraform
         run: |
-          terraform init -backend-config="encrypt=true" -backend-config="bucket=${{ secrets.S3_TF_BACKUP }}" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1" -backend-config="token=${{ env.AWS_SESSION_TOKEN }}"
+          terraform init -backend-config="encrypt=true" -backend-config="bucket=tarrotomado" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1"
       - name: Select Workspace
         run: |
           terraform workspace select test || terraform workspace new test
