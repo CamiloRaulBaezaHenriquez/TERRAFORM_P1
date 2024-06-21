@@ -21,7 +21,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::975050277813:role/ROL-OIDC-GITHUB
           aws-region: us-east-1
-          role-session-name: aws-cbaeza
+          role-session-name: aws-cbaeza1
       - uses: hashicorp/setup-terraform@v2
         name: Configure Terraform
         with:
