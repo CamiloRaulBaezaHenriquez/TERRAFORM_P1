@@ -22,25 +22,25 @@ jobs:
           role-to-assume: arn:aws:iam::975050277813:role/ROL-OIDC-GITHUB
           aws-region: us-east-1
           role-session-name: aws-cbaeza
-      #- uses: hashicorp/setup-terraform@v2
-      #  name: Configure Terraform
-      #  with:
-      #    terraform_version: 1.1.4
-      #- name: Initialize the Terraform
-      #  run: |
-      #    terraform init -backend-config="encrypt=true" -backend-config="bucket=tarrito-charmander-cb-tf-test" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1" -backend-config="token=${{ env.AWS_SESSION_TOKEN }}"
-      #- name: Select Workspace
-      #  run: |
-      #    terraform workspace select test || terraform workspace new test
-      #    terraform workspace list
-      #- name: Terraform Validate
-      #  run: |
-      #    terraform state pull
-      #    terraform fmt
-      #    terraform validate
-      #- name: Terraform Plan
-      #   run:  terraform plan
+      - uses: hashicorp/setup-terraform@v2
+        name: Configure Terraform
+        with:
+          terraform_version: 1.1.4
+      - name: Initialize the Terraform
+        run: |
+          terraform init -backend-config="encrypt=true" -backend-config="bucket=${{ secrets.S3_TF_BACKUP }}" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1" -backend-config="token=${{ env.AWS_SESSION_TOKEN }}"
+      - name: Select Workspace
+        run: |
+          terraform workspace select test || terraform workspace new test
+          terraform workspace list
+      - name: Terraform Validate
+        run: |
+          terraform state pull
+          terraform fmt
+          terraform validate
+      - name: Terraform Plan
+        run:  terraform plan
       # - name: Terraform Apply 
       #  run: terraform apply -auto-approve
-      #- name: Validate Creation/Changes
-      #  run: terraform state list
+      - name: Validate Creation/Changes
+        run: terraform state list
