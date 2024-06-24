@@ -32,7 +32,7 @@ jobs:
           terraform init
       - name: Select Workspace
         run: |
-          terraform workspace new test
+          terraform workspace select test || terraform workspace new test
           terraform workspace list
       - name: Terraform Validate
         run: |
@@ -41,10 +41,7 @@ jobs:
           terraform validate
       - name: Terraform Plan
         run:  terraform plan
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
       - name: Validate Creation/Changes
         run: terraform state list
-
-
- #       terraform workspace select test ||
