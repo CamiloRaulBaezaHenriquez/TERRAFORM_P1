@@ -9,9 +9,9 @@ terraform {
     bucket = "tarrotomado"
     key    = "network/terraform.tfstate"
     region = "us-east-1"
-    assume_role = {
-    role_arn = "arn:aws:iam::975050277813:role/ROL-OIDC-GITHUB"
-    }
+    # assume_role = {
+    # role_arn = "arn:aws:iam::975050277813:role/ROL-OIDC-GITHUB"
+    # }
   } 
 }
 
