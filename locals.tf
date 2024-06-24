@@ -1,3 +1,3 @@
 locals {
-    s3_bucket_n1 = "tarroconcepcioncrazy"
+    s3_bucket_n1 = "tarroconcepcioncrazy-${terraform.workspace}"
 }
