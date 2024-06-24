@@ -2,8 +2,6 @@ name: Despliegue en testing con rol
 on:
    push:
      branches: [ develop ]
-env:
-  BUCKET_NAME : ${{ secrets.S3_TF_BACKUP }}
 jobs:
   deploy:
     name: Deploy
