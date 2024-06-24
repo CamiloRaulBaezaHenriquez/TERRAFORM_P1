@@ -2,6 +2,9 @@ name: Despliegue en testing con rol
 on:
    push:
      branches: [ develop ]
+env:
+  BUCKET_NAME : "tarrotomado"
+  AWS_REGION : "us-east-1"  
 jobs:
   deploy:
     name: Deploy
@@ -26,10 +29,10 @@ jobs:
           terraform_version: 1.1.4
       - name: Initialize the Terraform
         run: |
-          terraform init -backend-config="encrypt=true" -backend-config="bucket=tarrotomado" -backend-config="key=state/terraform.tfstate" -backend-config="region=us-east-1"
+          terraform init
       - name: Select Workspace
         run: |
-          terraform workspace select test || terraform workspace new test
+          terraform workspace new test
           terraform workspace list
       - name: Terraform Validate
         run: |
@@ -38,7 +41,10 @@ jobs:
           terraform validate
       - name: Terraform Plan
         run:  terraform plan
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
       - name: Validate Creation/Changes
         run: terraform state list
+
+
+ #       terraform workspace select test ||
