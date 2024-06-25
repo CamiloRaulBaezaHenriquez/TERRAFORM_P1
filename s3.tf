@@ -16,7 +16,7 @@ resource "aws_s3_bucket_acl" "s3_bucket_n2" {
   depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_n2,
                 aws_s3_bucket_public_access_block.s3_bucket_n2]
   bucket = aws_s3_bucket.s3_bucket_n2.id
-  ##acl    = "private"
+  acl    = "public-read"
 }
 
 resource "aws_s3_bucket_ownership_controls" "s3_bucket_n2" {
