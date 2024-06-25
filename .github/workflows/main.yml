@@ -21,8 +21,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROL_OIDC }}
-          aws-region: us-east-1
-          role-session-name: aws-cbaeza1
+          aws-region: ${{secrets.AWS_REGION}}
+          role-session-name: ${{secrets.AWS_SESSION_OIDC}}
       - uses: hashicorp/setup-terraform@v3
         name: Configure Terraform
         with:
