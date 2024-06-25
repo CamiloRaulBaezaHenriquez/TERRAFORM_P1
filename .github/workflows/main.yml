@@ -20,7 +20,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::975050277813:role/ROL-OIDC-GITHUB
+          role-to-assume: ${{ secrets.AWS_ROL_OIDC }}
           aws-region: us-east-1
           role-session-name: aws-cbaeza1
       - uses: hashicorp/setup-terraform@v3
@@ -41,7 +41,7 @@ jobs:
           terraform validate
       - name: Terraform Plan
         run:  terraform plan
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
       - name: Validate Creation/Changes
         run: terraform state list
