@@ -42,3 +42,11 @@ resource "aws_s3_object" "s3_object_tarro_files" {
   source = "./Studio-develop/${each.value}"
   etag = filemd5("./Studio-develop/${each.value}")
 }
+
+resource "aws_s3_object" "s3_object_tarro_files" {
+  for_each = fileset("./upload/","**")
+  bucket = aws_s3_bucket.s3_bucket_n2.id
+  key = "upload/${each.value}"
+  source = "./upload/${each.value}"
+  etag = filemd5("./upload/${each.value}")
+}
