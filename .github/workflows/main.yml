@@ -34,13 +34,13 @@ jobs:
         run: |
           terraform workspace select test || terraform workspace new test
           terraform workspace list
-      # - name: Terraform Validate
-      #   run: |
-      #     terraform state pull
-      #     terraform fmt
-      #     terraform validate
-      # - name: Terraform Plan
-      # run:  terraform plan
+      - name: Terraform Validate
+        run: |
+          terraform state pull
+          terraform fmt
+          terraform validate
+      - name: Terraform Plan
+      run:  terraform plan
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve
       - name: Validate Creation/Changes
