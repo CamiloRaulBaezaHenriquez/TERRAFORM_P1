@@ -37,13 +37,13 @@ resource "aws_s3_bucket" "s3_bucket_n1" {
 
 ## Objects S3s
 
-# resource "aws_s3_object" "s3_object_tarro_rey_dau" {
-#   for_each = fileset("./Studio-develop/","**")
-#   bucket = local.s3_bucket_n1.id
-#   key = "Studio-develop/${each.value}"
-#   source = "./Studio-develop/${each.value}"
-#   etag = filemd5("./Studio-develop/${each.value}")
-# }
+resource "aws_s3_object" "s3_object_tarro_rey_dau" {
+  for_each = fileset("./Studio-develop/","**")
+  bucket = local.s3_bucket_n1.id
+  key = "Studio-develop/${each.value}"
+  source = "./Studio-develop/${each.value}"
+  etag = filemd5("./Studio-develop/${each.value}")
+}
 
 # resource "aws_s3_object" "s3_object_tarro_files2" {
 #   for_each = fileset("./upload/","**")
