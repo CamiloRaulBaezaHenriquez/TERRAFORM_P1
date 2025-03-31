@@ -4,7 +4,7 @@ on:
      branches: [ develop ]
 env:
   BUCKET_NAME : "tarrotomado"
-  AWS_REGION : "us-east-1"  
+  # AWS_REGION : "us-east-1"  
 jobs:
   deploy:
     name: Deploy
@@ -41,7 +41,7 @@ jobs:
           terraform validate
       - name: Terraform Plan
         run:  terraform plan
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
       - name: Validate Creation/Changes
         run: terraform state list
