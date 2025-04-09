@@ -1,4 +1,4 @@
 locals {
     s3_bucket_n1 = "tarron1-cbaeza-${terraform.workspace}-reydau"
-    s3_bucket_n2 = "bucket-cbaeza-${terraform.workspace}-AWSIGAIData"
+    s3_bucket_n2 = "bucket-cbaeza-${terraform.workspace}-AWSInnovateIAData"
 }
