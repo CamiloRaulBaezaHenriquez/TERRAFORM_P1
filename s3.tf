@@ -1,6 +1,13 @@
 # Buckets
+
+# Bucket tarro 
 resource "aws_s3_bucket" "s3_bucket_n1" {
     bucket = local.s3_bucket_n1
+}
+
+#Bucket AWS Innovate
+resource "aws_s3_bucket" "s3_bucket_n1" {
+    bucket = local.s3_bucket_n2
 }
 
 # resource "aws_s3_bucket" "s3_bucket_n2" {
