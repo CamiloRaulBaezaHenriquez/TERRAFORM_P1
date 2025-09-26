@@ -10,6 +10,11 @@ resource "aws_s3_bucket" "s3_bucket_n2" {
     bucket = local.s3_bucket_n2
 }
 
+#Bucket AWS tarro apply test
+resource "aws_s3_bucket" "s3_bucket_n3" {
+    bucket = local.s3_bucket_n3
+}
+
 # resource "aws_s3_bucket" "s3_bucket_n2" {
 #   bucket = local.s3_bucket_n2
 #   tags = {
